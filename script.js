@@ -1,14 +1,29 @@
 
 function handleFilesSelect (e) {
+
     var files = e.target.files;
+    var leftTable = document.querySelector('.left-table');
+    var rightTable = document.querySelector('.right-table');
+
     for(var i = 0, file; file = files[i]; i++) {
-        var li = document.createElement('li');
-        li.innerHTML = file.name + ' ' + file.size;
+
+        var tr = document.createElement('tr');
+        var td1 = document.createElement('td');
+        var td2 = td1.cloneNode(false);
+
+        td1.innerHTML = file.name;
+        tr.appendChild(td1);
+        td2.innerHTML = file.size;
+        tr.appendChild(td2);
+
         if(file.type.match('image.*')) {
-            document.querySelector('.left-list').appendChild(li);
+            var row = leftTable.appendChild(tr);
+            row.appendChild(td1);
+            row.appendChild(td2);
         } else {
-            console.log(file);
-            document.querySelector('.right-list').appendChild(li);
+            var row = rightTable.appendChild(tr);
+            row.appendChild(td1);
+            row.appendChild(td2);
         }
 
     }
